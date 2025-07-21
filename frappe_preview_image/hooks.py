@@ -1,7 +1,7 @@
 app_description = "Unity Project"
 app_email = "guenther.eder@indigitalform.com"
 app_license = "mit"
-app_name = "frappe_preview_image"
+app_name = "unity_project"
 app_publisher = "In Digital Form GmbH"
 app_title = "Unity Project"
 
