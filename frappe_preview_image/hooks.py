@@ -7,6 +7,6 @@ app_license = "mit"
 
 doc_events = {
 	"Unity Project": {
-		"after_save": "frappe_preview_image.frappe_preview_image.on_after_save"
+		"after_save": "frappe_preview_image.frappe_preview_image.frappe_preview_image.on_after_save"
 	}
 }
