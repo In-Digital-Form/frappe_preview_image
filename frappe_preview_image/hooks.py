@@ -3,7 +3,7 @@ app_title = "Frappe Preview Image"
 app_publisher = "In Digital Form GmbH"
 app_description = "ERPNext integration for Unity Project to Configurator Project synchronization"
 app_email = "guenther.eder@indigitalform.com"
-app_license = "mit"
+app_license = ""
 
 doc_events = {
 	"Unity Project": {
