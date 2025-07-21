@@ -5,14 +5,15 @@ import json
 from frappe.utils.file_manager import save_file
 
 
-def handle_preview_image(doc, method):
+def on_after_save(doc, method):
     """
     After saving a Configurator Project, parse its stored JSON to extract a Base64 thumbnail,
     create a File record, and update the preview_image field with the file URL.
     """
     # 1) Parse the ConfiguratorProject's project_data JSON
-    data = json.loads(doc.project_data or "{}")
-    thumb = data.get("thumbnail")
+    # data = json.loads(doc.project_data or "{}")
+    # thumb = data.get("thumbnail")
+    thumb = doc.thumbnail
     if not thumb:
         return
 
