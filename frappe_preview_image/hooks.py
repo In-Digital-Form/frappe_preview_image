@@ -1,13 +1,14 @@
-app_description = "Unity Project"
+app_name = "frappe_preview_image"
+app_title = "Frappe Preview Image"
+app_publisher = "In Digital Form GmbH"
+app_description = "ERPNext integration for Unity Project to Configurator Project synchronization"
 app_email = "guenther.eder@indigitalform.com"
 app_license = "mit"
-app_name = "unity_project"
-app_publisher = "In Digital Form GmbH"
-app_title = "Unity Project"
 
+build_js = "frappe_preview_image.bundle.js"
 
 doc_events = {
-    "Unity Project": {
-        "after_save": "frappe_preview_image.frappe_preview_image.on_after_save"
-    }
+	"Unity Project": {
+		"after_save": "frappe_preview_image.frappe_preview_image.on_after_save"
+	}
 }
