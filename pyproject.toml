@@ -1,17 +1,14 @@
 [project]
 name = "frappe_preview_image"
 version = "0.0.1"
-description = "ERPNext integration for Unity Project to Configurator Project synchronization"
+description = "Frappe Preview Image"
 authors = [
   { name = "Günther Eder", email = "guenther.eder@indigitalform.com" }
 ]
 dependencies = [
-  "frappe"
 ]
 
 [build-system]
 requires = [
-  "setuptools>=61.0",
-  "wheel"
 ]
 build-backend = "setuptools.build_meta"
