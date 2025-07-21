@@ -6,34 +6,37 @@ from frappe.utils.file_manager import save_file
 
 def on_after_save(doc, method):
     """
-    After saving a Configurator Project, parse its stored JSON to extract a Base64 thumbnail,
-    create a File record, and update the preview_image field with the file URL.
+    After saving a Unity Project, get its thumbnail, create a File record,
+    and attach it to the corresponding Configurator Project.
     """
 
-    thumb = doc.thumbnail
-    if not thumb:
+    if not doc.thumbnail:
         return
-    
+
     project_id = doc.name
 
-    try:
-        cp = frappe.get_doc("Configurator Project", {"project_id": project_id})
-    except frappe.DoesNotExistError:
+    # Find the corresponding Configurator Project name
+    cp_name = frappe.db.get_value("Configurator Project", {"project_id": project_id})
+    if not cp_name:
+        frappe.log_error(f"No Configurator Project found for Unity Project {project_id}", "Preview Image Sync")
         return
 
-    # 2) Strip data URI prefix if present
+    thumb = doc.thumbnail
+    # Strip data URI prefix if present
     if thumb.startswith("data:image"):
         thumb = thumb.split(",", 1)[1]
 
-    # 3) Save the PNG via save_file (decodes Base64)
-    filedoc = save_file(
-        f"{doc.project_id}_preview.png",
-        thumb,
-        "Configurator Project",
-        doc.name,
-        is_private=0,
-        decode=True
-    )
+    # Save the PNG via save_file, attached to the Configurator Project
+    try:
+        file_doc = save_file(
+            fname=f"{project_id}_preview.png",
+            content=thumb,
+            dt="Configurator Project",
+            dn=cp_name
+        )
 
-    cp.attach_image = filedoc.file_url
-    cp.save(ignore_permissions=True)
+        # Update the attach_image field in Configurator Project without triggering save hooks
+        frappe.db.set_value("Configurator Project", cp_name, "attach_image", file_doc.file_url)
+
+    except Exception as e:
+        frappe.log_error(f"Failed to create preview image for {project_id}: {e}", "Preview Image Sync")
