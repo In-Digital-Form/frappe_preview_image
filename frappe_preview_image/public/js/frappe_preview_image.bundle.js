@@ -1,1 +1,0 @@
-// frappe_preview_image.bundle.js

@@ -5,8 +5,6 @@ app_description = "ERPNext integration for Unity Project to Configurator Project
 app_email = "guenther.eder@indigitalform.com"
 app_license = "mit"
 
-build_js = "frappe_preview_image.bundle.js"
-
 doc_events = {
 	"Unity Project": {
 		"after_save": "frappe_preview_image.frappe_preview_image.on_after_save"
