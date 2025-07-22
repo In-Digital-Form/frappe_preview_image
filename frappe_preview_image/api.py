@@ -5,6 +5,7 @@ from frappe.utils.file_manager import save_file
 
 
 def on_after_save(doc, method):
+    frappe.throw("Hook is being triggered!")
     """
     After saving a Unity Project, get its thumbnail, create a File record,
     and attach it to the corresponding Configurator Project.
